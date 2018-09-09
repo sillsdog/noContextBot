@@ -35,10 +35,10 @@ async def post_tweets():
             else:
                 print("Twit API error has occured.")
             CurrentMessages.clear()
-        for i in range(600): #Waits for 30 minutes
-            TMinus = "Posting in T-%s" % (str(600-i))
-            await client.change_presence(game=discord.Game(name=TMinus) )
-            await asyncio.sleep(1)
+        for i in range(10): #Waits for 10 minutes
+            TMinus = "Posting in %s minute(s)" % (10-i)
+            await client.change_presence(game=discord.Game(name=TMinus))
+            await asyncio.sleep(60)
 
 @client.event
 async def on_ready():
