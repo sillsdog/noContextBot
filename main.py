@@ -16,6 +16,8 @@ client = commands.Bot(command_prefix='!')
 CurrentMessages = []
 ContextOn = True
 
+loadGreetTxt = requests.get("https://pastebin.com/raw/sNEdNfAF")
+
 RobId = "154732271742615553"
 TwitApi = twitter.Api(consumer_key='kEpgtAzIwc3mXuxY8lWpoiMGT',
 consumer_secret='rcm2pqUj6CMiCmy1TL8PWheimxlJk9CrLcMym569i2zVbIFhba',
@@ -26,7 +28,7 @@ async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
     while not client.is_closed:
-        if ContextOn and len(CurrentMessages) >= 2:
+        if ContextOn and CurrentMessages and len(CurrentMessages) >= 2:
             ChosenMsg = random.choice(CurrentMessages)
             if ChosenMsg:
                 TwitApi.PostUpdate(ChosenMsg.content)
@@ -71,15 +73,7 @@ async def on_message(message):
     elif message.content.upper() == "!VERSION":
         await client.send_message(message.channel,"Version: 1.0.0")
     elif message.content.upper() == "!ABOUT":
-        await client.send_message(message.author,'''
-Hey There! I'm No Context Bot.
-I was programmed by @robuyasu#3100, and was created September 9, 2018.
-
-My purpose is to select recent messages, and tweet one of the many random recent messages.
-I am coded in Python, and hosted at heroku.
-
-Want to view my source code or help out? View https://github.com/Robuyasu/noContextBot
-        ''')
+        await client.send_message(message.author,loadGreetTxt.Text)
 
 client.loop.create_task(post_tweets())
 client.run('NDg4MTQ0MjUzNjMwMDIxNjUx.DnX8mQ.2l3sgx7QoU1bQAbLTH9LgwQovwI')
