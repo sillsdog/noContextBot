@@ -24,10 +24,10 @@ access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
 
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
-        TwitApi.PostUpdate(ChosenMsg.content,media=message.attachments)
+        TwitApi.PostUpdate(message.content,media=message.attachments)
     else:
         if postcmd == False:
-            TwitApi.PostUpdate(ChosenMsg.content)
+            TwitApi.PostUpdate(message.content)
         else:
             Content = message.content.split(" ")
             TwitApi.PostUpdate(" ".join(Content[1:]))
