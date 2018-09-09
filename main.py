@@ -59,7 +59,8 @@ async def bootdown(message):
 async def post(message):
     if message.author.id == RobId:
         await client.send_message(message.channel,"Posting message..")
-        post_status(message,postcmd=True)
+        post = post_status(message,postcmd=True)
+        await client.send_message(message.channel,str(post))
         await client.send_message(message.channel,"Posted message to twitter!")
 
 async def version(message):
