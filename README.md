@@ -5,7 +5,7 @@ It is exclusively for the No Context Discord server, which can be joined right h
 
 **Current Version: 1.0.0**
 
-##Commands
+##Commands##
 The current commands for the bot are as shows:
 
 #!bootdown
