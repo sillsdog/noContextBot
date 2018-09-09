@@ -95,14 +95,16 @@ async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
     while not client.is_closed:
-        if ContextOn and CurrentMessages and len(CurrentMessages) >= 1 :
-            ChosenMsg = random.choice(CurrentMessages)
-            if ChosenMsg:
-                post_status(ChosenMsg)
-                await client.send_message(ChosenMsg.channel,"%s, your message has been tweeted to the twitter account!"%(ChosenMsg.author.mention))
-            else:
-                print("Twit API error has occured.")
-            CurrentMessages.clear()
+        if ContextOn and CurrentMessages:
+            if len(CurrentMessages) >= 1:
+                ChosenMsg = random.choice(CurrentMessages)
+                if ChosenMsg:
+                    post_status(ChosenMsg)
+                    await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account!"%(ChosenMsg.author.mention))
+                else:
+                    print("Twit API error has occured.")
+                CurrentMessages.clear()
+
         for i in range(10): #Waits for 10 minutes
             TMinus = "Posting in %s minute(s)" % (10-i)
             await client.change_presence(game=discord.Game(name=TMinus))
