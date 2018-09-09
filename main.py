@@ -27,7 +27,12 @@ def post_status(message,postcmd=False):
         attaches = []
         for item in message.attachments:
             attaches.append(item["url"])
-        TwitApi.PostUpdate(message.content,media=attaches)
+
+        if postcmd == False:
+            TwitApi.PostUpdate(message.content,media=attaches)
+        else:
+            Content = message.content.split(" ")
+            TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
     else:
         if postcmd == False:
             TwitApi.PostUpdate(message.content)
