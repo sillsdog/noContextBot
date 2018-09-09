@@ -5,21 +5,25 @@ It is exclusively for the No Context Discord server, which can be joined right h
 
 **Current Version: 1.0.0**
 
-##Commands##
+## Commands
 The current commands for the bot are as shows:
 
-#!bootdown
+# !bootdown
 This command is reserved only for Robuyasu, and stops the process of tweeting. Only used for emergencies or reworkings.
+Example: `!bootdown`
 
-#!bootup
+# !bootup
 This command is reserved only for Robuyasu, and starts/recontinues the process of tweeting. 
+Example: `!bootup`
 
-#!post
+# !post
 This command is reserved only for Robuyasu, and posts a message to twitter.
-Example: !post This is a test message.
+Example: `!post This is a test message.`
 
-#!version
+# !version
 Returns the version of the bot, by responding back to the user.
+Example: `!version`
 
-#!about
+# !about
 DMs the message author of the bot credentials, which shows the bot version, github page, and more info.
+Example: `!about`
