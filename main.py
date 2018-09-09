@@ -27,8 +27,9 @@ def post_status(message,postcmd=False):
         TwitApi.PostUpdate(ChosenMsg.content,media=message.attachments)
     else:
         if postcmd == False:
-            TwitApi.PostUpdate(ChosenMsg.Content)
+            TwitApi.PostUpdate(ChosenMsg.content)
         else:
+            Content = message.content.split(" ")
             TwitApi.PostUpdate(" ".join(Content[1:]))
 
 async def bootup(message):
@@ -49,7 +50,6 @@ async def bootdown(message):
 
 async def post(message):
     if message.author.id == RobId:
-        Content = message.content.split(" ")
         await client.send_message(message.channel,"Posting message..")
         post_status(message,postcmd=True)
         await client.send_message(message.channel,"Posted message to twitter!")
