@@ -22,11 +22,14 @@ consumer_secret='rcm2pqUj6CMiCmy1TL8PWheimxlJk9CrLcMym569i2zVbIFhba',
 access_token_key='1038495867639136256-Z4Zl3k0vtD3KPe707eDEuCNpcF2geH',
 access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
 
-def post_status(message):
+def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
         TwitApi.PostUpdate(ChosenMsg.content,media=message.attachments)
     else:
-        TwitApi.PostUpdate(ChosenMsg.Content)
+        if postcmd == False:
+            TwitApi.PostUpdate(ChosenMsg.Content)
+        else:
+            TwitApi.PostUpdate(" ".join(Content[1:]))
 
 async def bootup(message):
     if message.author.id == RobId:
@@ -48,7 +51,7 @@ async def post(message):
     if message.author.id == RobId:
         Content = message.content.split(" ")
         await client.send_message(message.channel,"Posting message..")
-        post_status(" ".join(Content[1:]))
+        post_status(message,postcmd=True)
         await client.send_message(message.channel,"Posted message to twitter!")
 
 async def version(message):
