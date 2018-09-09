@@ -17,10 +17,7 @@ CurrentMessages = []
 ContextOn = True
 
 RobId = "154732271742615553"
-TwitApi = twitter.Api(consumer_key='kEpgtAzIwc3mXuxY8lWpoiMGT',
-consumer_secret='rcm2pqUj6CMiCmy1TL8PWheimxlJk9CrLcMym569i2zVbIFhba',
-access_token_key='1038495867639136256-Z4Zl3k0vtD3KPe707eDEuCNpcF2geH',
-access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
+TwitApi = twitter.Api()
 
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
