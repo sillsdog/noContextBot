@@ -35,12 +35,13 @@ async def post_tweets():
             else:
                 print("Twit API error has occured.")
             CurrentMessages.clear()
-        await asyncio.sleep(600) #Waits for 30 minutes
+        for i in range(600): #Waits for 30 minutes
+            await client.change_presence(game=discord.Game(name="Posting in T-%s" % ( str(i) ) ) )
+            await asyncio.sleep(1)
 
 @client.event
 async def on_ready():
     print("No Context Bot has been started up. To stop the program @robuyasu#3100 , say !bootdown . Version 1.0.0")
-    await client.change_presence(game=discord.Game(name="No Contexting"))
 
 @client.event
 async def on_message(message):
