@@ -69,12 +69,18 @@ Want to view my source code or help out? View https://github.com/Robuyasu/noCont
 
     ''')
 
+async def ppost(message):
+    if message.author.id == RobId:
+        await client.send_message(message.channel, message.content)
+        await client.send_message(message.channel, str(message.attachments) )
+
 contcmds = {
     "!BOOTUP":bootup,
     "!BOOTDOWN":bootdown,
     "!POST":post,
     "!VERSION":version,
-    "!ABOUT":about
+    "!ABOUT":about,
+    "!PPOST":ppost
 }
 
 async def post_tweets():
