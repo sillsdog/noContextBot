@@ -130,4 +130,4 @@ async def on_message(message):
             await func(message)
 
 client.loop.create_task(post_tweets())
-client.run('NDg4MTQ0MjUzNjMwMDIxNjUx.DnX8mQ.2l3sgx7QoU1bQAbLTH9LgwQovwI')
+client.run('')
