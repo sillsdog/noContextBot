@@ -37,10 +37,11 @@ async def post_tweets():
 @client.event
 async def on_ready():
     print("No Context Bot has been started up. To stop the program @robuyasu#3100 , say !bootdown . Version 1.0.0")
+    await client.change_presence(game=discord.Game(name="No Contexting"))
 
 @client.event
 async def on_message(message):
-    if message.channel.id == "488054001795989524":
+    if message.channel.id == "488054001795989524" and not message.content.startswith("!"):
         CurrentMessages.append(message)
 
     if message.content.upper() == "!BOOTDOWN":
