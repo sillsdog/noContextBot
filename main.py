@@ -1,14 +1,16 @@
 #No Context Bot by @robuyasu#3100
 #Version 1.0.0
 
-import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
+from itertools import cycle
+from collections import defaultdict
+import discord
 import asyncio
 import twitter
 import requests
-from itertools import cycle
 import random
+import commandsdisc
 
 Client = discord.Client()
 client = commands.Bot(command_prefix='!')
@@ -21,6 +23,14 @@ TwitApi = twitter.Api(consumer_key='kEpgtAzIwc3mXuxY8lWpoiMGT',
 consumer_secret='rcm2pqUj6CMiCmy1TL8PWheimxlJk9CrLcMym569i2zVbIFhba',
 access_token_key='1038495867639136256-Z4Zl3k0vtD3KPe707eDEuCNpcF2geH',
 access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
+
+contcmds = {
+    "!BOOTUP":commandsdisc.bootup,
+    "!BOOTDOWN":commandsdisc.bootdown,
+    "!POST":commandsdisc.post,
+    "!VERSION":commandsdisc.version,
+    "!ABOUT":commandsdisc.about
+}
 
 async def post_tweets():
     await client.wait_until_ready()
@@ -45,42 +55,15 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!"):
+    if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!") and len(message.content) >= 1 :
         CurrentMessages.append(message)
 
-    if message.content.upper() == "!BOOTDOWN":
-        if message.author.id == RobId:
-            ContextOn = False
-            await client.send_message(message.channel,"Successfully booted down.")
-        else:
-            await client.send_message(message.channel,"You do not have the permissions to do that, %s!" % (message.author.mention))
+    for cmd,func in contcmds:
+        if message.content.upper().startswith(cmd):
+            func(message)
 
-    elif message.content.upper() == "!BOOTUP":
-        if message.author.id == RobId:
-            ContextOn = True
-            await client.send_message(message.channel,"Successfully booted up.")
-        else:
-            await client.send_message(message.channel,"You do not have the permissions to do that, %s!" % (message.author.mention))
 
-    elif message.content.upper().startswith("!POST"):
-        if message.author.id == RobId:
-            Content = message.content.split(" ")
-            await client.send_message(message.channel,"Posting message..")
-            TwitApi.PostUpdate(" ".join(Content[1:]))
-            await client.send_message(message.channel,"Posted message to twitter!")
-    elif message.content.upper() == "!VERSION":
-        await client.send_message(message.channel,"Version: 1.0.0")
-    elif message.content.upper() == "!ABOUT":
-        await client.send_message(message.author,'''
-Hey There! I'm No Context Bot.
-I was programmed by @robuyasu#3100, and was created September 9, 2018.
 
-My purpose is to select recent messages, and tweet one of the many random recent messages.
-I am coded in Python, and hosted at heroku.
-
-Want to view my source code or help out? View https://github.com/Robuyasu/noContextBot
-
-        ''')
 
 client.loop.create_task(post_tweets())
 client.run('NDg4MTQ0MjUzNjMwMDIxNjUx.DnX8mQ.2l3sgx7QoU1bQAbLTH9LgwQovwI')
