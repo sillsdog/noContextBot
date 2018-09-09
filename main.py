@@ -22,6 +22,12 @@ consumer_secret='rcm2pqUj6CMiCmy1TL8PWheimxlJk9CrLcMym569i2zVbIFhba',
 access_token_key='1038495867639136256-Z4Zl3k0vtD3KPe707eDEuCNpcF2geH',
 access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
 
+def post_status(message):
+    if len(message.attachments) >= 1:
+        TwitApi.PostUpdate(ChosenMsg.content,media=message.attachments)
+    else:
+        TwitApi.PostUpdate(ChosenMsg.Content)
+
 async def bootup(message):
     if message.author.id == RobId:
         ContextOn = True
@@ -42,7 +48,7 @@ async def post(message):
     if message.author.id == RobId:
         Content = message.content.split(" ")
         await client.send_message(message.channel,"Posting message..")
-        TwitApi.PostUpdate(" ".join(Content[1:]))
+        post_status(" ".join(Content[1:]))
         await client.send_message(message.channel,"Posted message to twitter!")
 
 async def version(message):
@@ -75,7 +81,7 @@ async def post_tweets():
         if ContextOn and CurrentMessages and len(CurrentMessages) >= 1 :
             ChosenMsg = random.choice(CurrentMessages)
             if ChosenMsg:
-                TwitApi.PostUpdate(ChosenMsg.content + " ".join(ChosenMsg.attachments))
+                post_status(ChosenMsg)
                 await client.send_message(ChosenMsg.channel,"%s, your message has been tweeted to the twitter account!"%(ChosenMsg.author.mention))
             else:
                 print("Twit API error has occured.")
