@@ -4,7 +4,6 @@
 import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
-from discord import Server
 import asyncio
 import twitter
 import requests
@@ -46,7 +45,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id == "488054001795989524" and not message.content.startswith("!"):
+    if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!"):
         CurrentMessages.append(message)
 
     if message.content.upper() == "!BOOTDOWN":
@@ -71,6 +70,16 @@ async def on_message(message):
             await client.send_message(message.channel,"Posted message to twitter!")
     elif message.content.upper() == "!VERSION":
         await client.send_message(message.channel,"Version: 1.0.0")
+    elif message.content.upper() == "!ABOUT":
+        await client.send_message(message.author,'''
+            Hey There! I'm No Context Bot.
+            I was programmed by @robuyasu#3100, and was created September 9, 2018.
+            
+            My purpose is to select recent messages, and tweet one of the many random recent messages.
+            I am coded in Python, and hosted at heroku.
+
+            Want to view my source code or help out? View https://github.com/Robuyasu/noContextBot
+        ''')
 
 client.loop.create_task(post_tweets())
 client.run('NDg4MTQ0MjUzNjMwMDIxNjUx.DnX8mQ.2l3sgx7QoU1bQAbLTH9LgwQovwI')
