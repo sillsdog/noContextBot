@@ -65,6 +65,8 @@ async def on_message(message):
             await client.send_message(message.channel,"Posted message to twitter!")
     elif message.content.upper() == "!VERSION":
         await client.send_message(message.channel,"Version: 1.0.0")
+    elif message.content.upper() == "!STATUS":
+        await client.send_message(message.channel,"Status: ContextOn=%s command_prefix=%s"%(str(ContextOn),"!")
 
 client.loop.create_task(post_tweets())
 client.run('NDg4MTQ0MjUzNjMwMDIxNjUx.DnX8mQ.2l3sgx7QoU1bQAbLTH9LgwQovwI')
