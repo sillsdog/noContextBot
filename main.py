@@ -11,7 +11,6 @@ import twitter
 import requests
 import random
 import commandsdisc
-
 Client = discord.Client()
 client = commands.Bot(command_prefix='!')
 
@@ -58,7 +57,7 @@ async def on_message(message):
     if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!") and len(message.content) >= 1 :
         CurrentMessages.append(message)
 
-    for cmd,func in contcmds:
+    for cmd,func in contcmds.items():
         if message.content.upper().startswith(cmd):
             func(message)
 
