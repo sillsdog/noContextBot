@@ -22,7 +22,6 @@ consumer_secret='rcm2pqUj6CMiCmy1TL8PWheimxlJk9CrLcMym569i2zVbIFhba',
 access_token_key='1038495867639136256-Z4Zl3k0vtD3KPe707eDEuCNpcF2geH',
 access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
 
-{"created_at": "Sun Sep 09 22:14:11 +0000 2018", "hashtags": [], "id": 1038913483256025089, "id_str": "1038913483256025089", "lang": "und", "source": "<a href="https://discordapp.com/api//" rel="nofollow">No Context Bot Discord</a>", "text": "kek", "urls": [], "user": {"created_at": "Sat Sep 08 18:34:43 +0000 2018", "default_profile": true, "description": "Things discord users randomly say |\nJoin us at https://t.co/xUirMJnmxe", "favourites_count": 1, "friends_count": 3, "id": 1038495867639136256, "id_str": "1038495867639136256", "lang": "en", "location": "No Context Discord Server", "name": "No Context Discord", "profile_background_color": "F5F8FA", "profile_banner_url": "https://pbs.twimg.com/profile_banners/1038495867639136256/1536431934", "profile_image_url": "http://pbs.twimg.com/profile_images/1038496036879327232/9LvPC9O7_normal.jpg", "profile_image_url_https": "https://pbs.twimg.com/profile_images/1038496036879327232/9LvPC9O7_normal.jpg", "profile_link_color": "1DA1F2", "profile_sidebar_border_color": "C0DEED", "profile_sidebar_fill_color": "DDEEF6", "profile_text_color": "333333", "profile_use_background_image": true, "screen_name": "discord_no", "statuses_count": 23}, "user_mentions": []}
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
         attaches = []
