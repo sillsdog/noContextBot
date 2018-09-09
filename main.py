@@ -24,7 +24,10 @@ access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
 
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
-        TwitApi.PostUpdate(message.content,media=message.attachments)
+        attaches = []
+        for item in message.attachments.items():
+            attaches.append(item["url"])
+        TwitApi.PostUpdate(message.content,media=attaches)
     else:
         if postcmd == False:
             TwitApi.PostUpdate(message.content)
