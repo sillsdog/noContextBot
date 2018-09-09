@@ -29,8 +29,11 @@ async def post_tweets():
     while not client.is_closed:
         if ContextOn and len(CurrentMessages) >= 2:
             ChosenMsg = random.choice(CurrentMessages)
-            TwitApi.PostUpdate(ChosenMsg.content)
-            await client.send_message(ChosenMsg.channel,"%s, your message has been tweeted to the twitter account!"%(ChosenMsg.author.mention))
+            if ChosenMsg:
+                TwitApi.PostUpdate(ChosenMsg.content)
+                await client.send_message(ChosenMsg.channel,"%s, your message has been tweeted to the twitter account!"%(ChosenMsg.author.mention))
+            else:
+                print("Twit API error has occured.")
             CurrentMessages.clear()
         await asyncio.sleep(600) #Waits for 30 minutes
 
