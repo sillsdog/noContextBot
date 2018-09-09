@@ -32,7 +32,7 @@ async def post_tweets():
             TwitApi.PostUpdate(ChosenMsg.content)
             await client.send_message(ChosenMsg.channel,"%s, your message has been tweeted to the twitter account!"%(ChosenMsg.author.mention))
             CurrentMessages.clear()
-        await asyncio.sleep(1800) #Waits for 30 minutes
+        await asyncio.sleep(600) #Waits for 30 minutes
 
 @client.event
 async def on_ready():
