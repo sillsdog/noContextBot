@@ -28,10 +28,10 @@ async def bootup(message):
 
 async def bootdown(message):
     if message.author.id == RobId:
-    ContextOn = False
-    await client.send_message(message.channel,"Successfully booted down.")
+        ContextOn = False
+        await client.send_message(message.channel,"Successfully booted down.")
     else:
-    await client.send_message(message.channel,"You do not have the permissions to do that, %s!" % (message.author.mention))
+        await client.send_message(message.channel,"You do not have the permissions to do that, %s!" % (message.author.mention))
 
 
 async def post(message):
