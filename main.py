@@ -29,16 +29,20 @@ def post_status(message,postcmd=False):
             attaches.append(item["url"])
 
         if postcmd == False:
-            TwitApi.PostUpdate(message.content,media=attaches)
+            pst = TwitApi.PostUpdate(message.content,media=attaches)
+            return pst
         else:
             Content = message.content.split(" ")
-            TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
+            pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
+            return pst
     else:
         if postcmd == False:
-            TwitApi.PostUpdate(message.content)
+            pst = TwitApi.PostUpdate(message.content)
+            return pst
         else:
             Content = message.content.split(" ")
-            TwitApi.PostUpdate(" ".join(Content[1:]))
+            pst = TwitApi.PostUpdate(" ".join(Content[1:]))
+            return pst
 
 async def bootup(message):
     if message.author.id == RobId:
