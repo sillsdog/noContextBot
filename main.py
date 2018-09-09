@@ -59,7 +59,7 @@ async def on_message(message):
 
     for cmd,func in contcmds.items():
         if message.content.upper().startswith(cmd):
-            func(message)
+            await func(message)
 
 
 
