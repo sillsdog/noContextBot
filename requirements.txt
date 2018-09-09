@@ -1,0 +1,15 @@
+aiohttp==1.0.5
+async-timeout==3.0.0
+asyncio==3.4.3
+certifi==2018.8.24
+chardet==3.0.4
+discord.py==0.16.12
+future==0.16.0
+idna==2.7
+multidict==4.4.0
+oauthlib==2.1.0
+python-twitter==3.4.2
+requests==2.19.1
+requests-oauthlib==1.0.0
+urllib3==1.23
+websockets==3.4
