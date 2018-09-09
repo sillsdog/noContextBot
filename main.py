@@ -72,10 +72,10 @@ async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
     while not client.is_closed:
-        if ContextOn and CurrentMessages and len(CurrentMessages) >= 2:
+        if ContextOn and CurrentMessages and len(CurrentMessages) >= 1 :
             ChosenMsg = random.choice(CurrentMessages)
             if ChosenMsg:
-                TwitApi.PostUpdate(ChosenMsg.content)
+                TwitApi.PostUpdate(ChosenMsg.content + " ".join(ChosenMsg.attachments))
                 await client.send_message(ChosenMsg.channel,"%s, your message has been tweeted to the twitter account!"%(ChosenMsg.author.mention))
             else:
                 print("Twit API error has occured.")
@@ -97,9 +97,6 @@ async def on_message(message):
     for cmd,func in contcmds.items():
         if message.content.upper().startswith(cmd):
             await func(message)
-
-
-
 
 client.loop.create_task(post_tweets())
 client.run('NDg4MTQ0MjUzNjMwMDIxNjUx.DnX8mQ.2l3sgx7QoU1bQAbLTH9LgwQovwI')
