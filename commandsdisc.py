@@ -1,23 +1,3 @@
-from discord.ext.commands import Bot
-from discord.ext import commands
-from itertools import cycle
-from collections import defaultdict
-import discord
-import asyncio
-import twitter
-import requests
-import random
-import commandsdisc
-Client = discord.Client()
-client = commands.Bot(command_prefix='!')
-CurrentMessages = []
-ContextOn = True
-RobId = "154732271742615553"
-TwitApi = twitter.Api(consumer_key='kEpgtAzIwc3mXuxY8lWpoiMGT',
-consumer_secret='rcm2pqUj6CMiCmy1TL8PWheimxlJk9CrLcMym569i2zVbIFhba',
-access_token_key='1038495867639136256-Z4Zl3k0vtD3KPe707eDEuCNpcF2geH',
-access_token_secret='e8VDI74qYaXLMxqittastSR3IXDjSjKnCHuTVpvkUjvdm')
-
 async def bootup(message):
     if message.author.id == RobId:
         ContextOn = True
