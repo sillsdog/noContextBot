@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+RobId = "154732271742615553"
+
 class ClientOwnerOnly:
     def __init__(self,client):
         self.client = client
