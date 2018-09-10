@@ -3,7 +3,6 @@
 from discord.ext.commands import Bot
 from discord.ext import commands
 from itertools import cycle
-from collections import defaultdict
 from TwitApi import TwitApi
 from twitter.error import TwitterError
 import discord
@@ -67,7 +66,7 @@ async def post_tweets():
                 await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
                 await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
             else:
-                await client.send("An error has occured in post_tweets(), client a nil value.")
+                await client.say("An error has occured in post_tweets(), client a nil value.")
         for i in range(10): #Waits for 10 minutes
             if ContextOn:
                 TMinus = "Posting in %s minute(s)" % (10-i)
