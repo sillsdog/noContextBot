@@ -83,6 +83,7 @@ async def on_message(message):
 
 @client.command(pass_context=True)
 async def bootup(ctx,*args):
+    message = ctx.message
     if message.author.id == RobId:
         ContextOn = True
         await client.say("Successfully booted up.")
@@ -91,6 +92,7 @@ async def bootup(ctx,*args):
 
 @client.command(pass_context=True)
 async def bootdown(ctx,*args):
+    message = ctx.message
     if message.author.id == RobId:
         ContextOn = False
         await client.say("Successfully booted down.")
@@ -112,6 +114,7 @@ async def version(ctx,*args):
 
 @client.command(pass_context=True)
 async def about(ctx,*args):
+    message = ctx.message
     await client.send_message(message.author,'''
 Hey There! I'm No Context Bot.
 I was programmed by @robuyasu#3100, and was created September 9, 2018.
@@ -149,6 +152,7 @@ Want to view my source code or help out? View https://github.com/Robuyasu/noCont
 
 @client.command(pass_context=True)
 async def ppost(ctx,*args):
+    message = ctx.message
     if message.author.id == RobId:
         await client.say(ctx.message.content)
         await client.say(str(ctx.message.attachments) )
