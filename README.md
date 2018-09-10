@@ -42,6 +42,18 @@ RSCL, and returns all recent 100 messages in #discord-says
 example:
 `!getmessages`
 
+### _ModeratorOnly_
+**!kick**
+Kicks the chosen player out of the server.
+Example:
+`!kick @robuyasu#3100`
+
+**!ban**
+Bans the chosen player out of the server.
+Example:
+`!ban @robuyasu#3100`
+
+### _UserAccessible_
 **!version**
 Returns the version of the bot, by responding back to the user.
 Example:
