@@ -13,7 +13,7 @@ RSCL = Reserved for Client Owner(Robuyasu)
 
 **Current Version: 1.2.5**
 
-# Commands
+### Commands
 The current commands for the bot are as shows:
 
 **!bootdown**
