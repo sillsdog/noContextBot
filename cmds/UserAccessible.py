@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 
 class UserAccessible: 
+    def __init__(self,client):
+        self.client = client
+
     @client.command(pass_context=True)
     async def version(self,ctx):
         await ctx.send("Version: " + CurrentVersion)
@@ -11,5 +14,5 @@ class UserAccessible:
         message = ctx.message
         await client.send_message(message.author,open('text/discordhelp.txt').read())
 
-def setup(bot):
-    bot.add_cog(UserAccessible(bot))
+def setup(client):
+    client.add_cog(UserAccessible(client))
