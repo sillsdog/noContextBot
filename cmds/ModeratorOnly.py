@@ -17,7 +17,7 @@ class ModeratorOnly:
 
     @commands.command(pass_context=True)
     async def kick(self, ctx, member: discord.Member):
-        if IsMod(ctx.message.author) and ctx.message.author is not member::
+        if IsMod(ctx.message.author) and ctx.message.author is not member:
             await self.client.kick(member)
             await self.client.send(member.mention + " has been kicked.")
 
