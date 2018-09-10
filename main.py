@@ -53,7 +53,7 @@ def post_status(message,postcmd=False):
 async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
-    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'))
+    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'),limit=25)
     while not client.is_closed:
         if ContextOn and CurrentMessages:
             MsgList = []
@@ -84,7 +84,7 @@ initial_extensions = [
     'cmds.UserAccessible'
 ]
 
-if __name__ == '__main__':
+if __name__ == '__main__': #Loads commands/extensions
     for extension in initial_extensions:
         try:
             client.load_extension(extension)
