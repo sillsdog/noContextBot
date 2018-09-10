@@ -49,8 +49,10 @@ async def post_tweets():
         if ContextOn and CurrentMessages:
             RanNum = random.randint(1,100)
             Indx = 0
+            print(str(CurrentMessages),str(RanNum))
             async for msg in CurrentMessages:
                 if Indx == RanNum:
+                    print("Posting status!")
                     stats = post_status(msg)
                     await client.send_message(msg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(msg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
                     await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
