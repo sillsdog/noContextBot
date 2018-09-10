@@ -9,6 +9,7 @@ import discord
 import asyncio
 import twitter
 import requests
+import os
 import random
 Client = discord.Client()
 client = commands.Bot(command_prefix='!')
@@ -17,7 +18,10 @@ CurrentMessages = []
 ContextOn = True
 
 RobId = "154732271742615553"
-TwitApi = twitter.Api()
+TwitApi = twitter.Api(consumer_key=os.environ.get('CONSKEY'),
+consumer_secret=consumer_key=os.environ.get('CONSCRT'),
+access_token_key=consumer_key=os.environ.get('ACSKEY'),
+access_token_secret=consumer_key=os.environ.get('ACSSCRT'))
 
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
@@ -127,4 +131,4 @@ async def on_message(message):
             await func(message)
 
 client.loop.create_task(post_tweets())
-client.run('')
+client.run(os.environ.get('TOKEN'))
