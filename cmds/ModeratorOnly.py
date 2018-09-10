@@ -17,7 +17,7 @@ class ModeratorOnly:
 
     @commands.command(pass_context=True)
     async def kick(self, ctx, member: discord.Member):
-        if IsMod(ctx.message.author)):
+        if IsMod(ctx.message.author):
             await self.client.kick(member)
             await self.client.send(member.mention + " has been kicked.")
 
@@ -29,3 +29,5 @@ class ModeratorOnly:
 
 def setup(client):
     client.add_cog(ModeratorOnly(client))
+
+    
