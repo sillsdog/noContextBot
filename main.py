@@ -88,7 +88,7 @@ async def bootup(ctx,*args):
     else:
         await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-
+@client.command()
 async def bootdown(ctx,*args):
     if message.author.id == RobId:
         ContextOn = False
@@ -96,7 +96,7 @@ async def bootdown(ctx,*args):
     else:
         await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-
+@client.command()
 async def post(ctx,*args):
     message = ctx.message
     if message.author.id == RobId:
@@ -105,9 +105,11 @@ async def post(ctx,*args):
         await client.say(str(post))
         await client.say("Posted message to twitter!")
 
+@client.command()
 async def version(message):
     await client.say("Version: 1.3.0")
 
+@client.command()
 async def about(ctx,*args):
     await client.send_message(message.author,'''
 Hey There! I'm No Context Bot.
@@ -144,6 +146,7 @@ Want to view my source code or help out? View https://github.com/Robuyasu/noCont
 
     ''')
 
+@client.command()
 async def ppost(ctx,*args):
     if message.author.id == RobId:
         await client.say(ctx.message.content)
