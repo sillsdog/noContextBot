@@ -4,6 +4,28 @@ import asyncio
 
 RobId = "154732271742615553"
 
+def post_status(message,postcmd=False):
+    if len(message.attachments) >= 1:
+        attaches = []
+        for item in message.attachments:
+            attaches.append(item["url"])
+
+        if postcmd == False:
+            pst = TwitApi.PostUpdate(message.content,media=attaches)
+            return pst
+        else:
+            Content = message.content.split(" ")
+            pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
+            return pst
+    else:
+        if postcmd == False:
+            pst = TwitApi.PostUpdate(message.content)
+            return pst
+        else:
+            Content = message.content.split(" ")
+            pst = TwitApi.PostUpdate(" ".join(Content[1:]))
+            return pst
+
 class ClientOwnerOnly:
     def __init__(self,client):
         self.client = client
