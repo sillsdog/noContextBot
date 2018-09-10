@@ -5,7 +5,7 @@ class ClientOwnerOnly:
     def __init__(self,client):
         self.client = client
 
-    @client.command(pass_context=True)
+    @commands.command(pass_context=True)
     async def bootup(self,ctx):
         message = ctx.message
         if message.author.id == RobId:
@@ -14,7 +14,7 @@ class ClientOwnerOnly:
         else:
             await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-    @client.command(pass_context=True)
+    @commands.command(pass_context=True)
     async def bootdown(self,ctx):
         message = ctx.message
         if message.author.id == RobId:
@@ -23,7 +23,7 @@ class ClientOwnerOnly:
         else:
             await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-    @client.command(pass_context=True)
+    @commands.command(pass_context=True)
     async def post(self,ctx):
         message = ctx.message
         if message.author.id == RobId:
@@ -34,7 +34,7 @@ class ClientOwnerOnly:
         else:
             await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-    @client.command(pass_context=True)
+    @commands.command(pass_context=True)
     async def ppost(self,ctx):
         message = ctx.message
         if message.author.id == RobId:
