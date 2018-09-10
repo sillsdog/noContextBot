@@ -12,8 +12,7 @@ import os
 import random
 from TwitApi import TwitApi
 Client = discord.Client()
-client = commands.Bot(command_prefix='!')
-CurrentMessages = []
+client = commands.Bot(command_prefix='!',max_messages=100)
 ContextOn = True
 RobId = "154732271742615553"
 CurrentVersion = open("./text/version.txt").read()
@@ -45,6 +44,7 @@ def post_status(message,postcmd=False):
 async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
+    CurrentMessages = client.messages
     while not client.is_closed:
         if ContextOn and CurrentMessages:
             if len(CurrentMessages) >= 1:
@@ -69,8 +69,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!"):
-        CurrentMessages.append(message)
     await client.process_commands(message) #Makes sure to process the command
 
 initial_extensions = [
