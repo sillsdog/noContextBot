@@ -19,6 +19,14 @@ CurrentVersion = open("./text/version.txt").read()
 
 RobId = "154732271742615553"
 
+async def random_status():
+    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'),limit=25)
+    MsgList = []
+    async for msg in CurrentMessages:
+        MsgList.append(msg)
+
+    return random.choice(MsgList)
+
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
         attaches = []
@@ -35,7 +43,7 @@ def post_status(message,postcmd=False):
                 pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
                 return pst
         except TwitterError:
-            pass
+            return False
     else:
         try:
             if postcmd == False:
@@ -48,22 +56,20 @@ def post_status(message,postcmd=False):
                 pst = TwitApi.PostUpdate(" ".join(Content[1:]))
                 return pst
         except TwitterError:
-            pass
+            return False
 
 async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
-    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'),limit=25)
     while not client.is_closed:
-        if ContextOn and CurrentMessages:
-            MsgList = []
-            async for msg in CurrentMessages:
-                MsgList.append(msg)
-
-            ChosenMsg = random.choice(MsgList)
+        if ContextOn:
+            ChosenMsg = random_status()
             stats = post_status(ChosenMsg)
-            await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
-            await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
+            if stats:
+                await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
+                await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
+            else:
+                await client.send("An error has occured in post_tweets(), stats a nil value.")
         for i in range(10): #Waits for 10 minutes
             if ContextOn:
                 TMinus = "Posting in %s minute(s)" % (10-i)
