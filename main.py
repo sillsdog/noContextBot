@@ -19,14 +19,6 @@ CurrentVersion = open("./text/version.txt").read()
 
 RobId = "154732271742615553"
 
-def random_status():
-    RanNum = random.randint(1,100)
-    Indx = 0
-    async for msg in CurrentMessages:
-        if Indx == RanNum:
-            return msg and RanNum:
-        Indx += 1
-
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
         attaches = []
