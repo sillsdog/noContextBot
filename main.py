@@ -15,7 +15,7 @@ client = commands.Bot(command_prefix='!')
 CurrentMessages = []
 ContextOn = True
 RobId = "154732271742615553"
-CurrentVersion = open("text/version.txt").read()
+CurrentVersion = open("./text/version.txt").read()
 TwitApi = twitter.Api(consumer_key=os.environ.get('CONSKEY'),
 consumer_secret=os.environ.get('CONSCRT'),
 access_token_key=os.environ.get('ACSKEY'),
