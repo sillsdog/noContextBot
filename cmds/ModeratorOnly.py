@@ -19,13 +19,13 @@ class ModeratorOnly:
     async def kick(self, ctx, member: discord.Member):
         if IsMod(ctx.message.author) and ctx.message.author is not member:
             await self.client.kick(member)
-            await self.client.send(member.mention + " has been kicked.")
+            await self.client.say(member.mention + " has been kicked.")
 
     @commands.command(pass_context=True)
     async def ban(self, ctx, member: discord.Member, days: int = 1):
         if IsMod(ctx.message.author) and ctx.message.author is not member:
             await self.client.ban(member,days)
-            await self.client.send("%s has been banned for %s days." % (member.mention,str(days)) )   
+            await self.client.say("%s has been banned for %s days." % (member.mention,str(days)) )   
 
 def setup(client):
     client.add_cog(ModeratorOnly(client))
