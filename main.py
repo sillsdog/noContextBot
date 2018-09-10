@@ -24,22 +24,27 @@ def post_status(message,postcmd=False):
         attaches = []
         for item in message.attachments:
             attaches.append(item["url"])
-
-        if postcmd == False:
-            pst = TwitApi.PostUpdate(message.content or " ",media=attaches)
-            return pst
-        else:
-            Content = message.content.split(" ")
-            pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
-            return pst
+        try:
+            if postcmd == False:
+                pst = TwitApi.PostUpdate(message.content or " ",media=attaches)
+                return pst
+            else:
+                Content = message.content.split(" ")
+                pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
+                return pst
+        except TwitterError:
+            pass
     else:
-        if postcmd == False:
-            pst = TwitApi.PostUpdate(message.content or " ")
-            return pst
-        else:
-            Content = message.content.split(" ")
-            pst = TwitApi.PostUpdate(" ".join(Content[1:]))
-            return pst
+        try:
+            if postcmd == False:
+                pst = TwitApi.PostUpdate(message.content or " ")
+                return pst
+            else:
+                Content = message.content.split(" ")
+                pst = TwitApi.PostUpdate(" ".join(Content[1:]))
+                return pst
+        except TwitterError:
+            pass
 
 async def post_tweets():
     await client.wait_until_ready()
