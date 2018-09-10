@@ -4,13 +4,14 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 from itertools import cycle
 from collections import defaultdict
+from TwitApi import TwitApi
+from twitter.error import TwitterError
 import discord
 import asyncio
 import twitter
 import sys, traceback
 import os
 import random
-from TwitApi import TwitApi
 Client = discord.Client()
 client = commands.Bot(command_prefix='!')
 ContextOn = True
@@ -18,14 +19,6 @@ RobId = "154732271742615553"
 CurrentVersion = open("./text/version.txt").read()
 
 RobId = "154732271742615553"
-
-async def random_status():
-    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'),limit=25)
-    MsgList = []
-    async for msg in CurrentMessages:
-        MsgList.append(msg)
-
-    return random.choice(MsgList)
 
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
@@ -63,7 +56,12 @@ async def post_tweets():
     await asyncio.sleep(5)
     while not client.is_closed:
         if ContextOn:
-            ChosenMsg = await random_status()
+            CurrentMessages = client.logs_from(client.get_channel('488054001795989524'),limit=25)
+            MsgList = []
+            async for msg in CurrentMessages:
+                MsgList.append(msg)
+                
+            ChosenMsg = random.choice(MsgList)
             stats = post_status(ChosenMsg)
             if stats:
                 await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
