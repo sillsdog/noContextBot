@@ -44,11 +44,11 @@ def post_status(message,postcmd=False):
 async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
-    CurrentMessages = client.logs_from(client.get_channel('488054001795989524')).__iter__()
+    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'))
     while not client.is_closed:
         if ContextOn and CurrentMessages:
             RanNum = random.randint(1,100)
-            for i,msg in CurrentMessages:
+            async for i,msg in CurrentMessages:
                 if i == RanNum:
                     stats = post_status(msg)
                     await client.send_message(msg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(msg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
