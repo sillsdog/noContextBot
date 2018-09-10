@@ -44,14 +44,14 @@ def post_status(message,postcmd=False):
 async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
-    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'))
+    CurrentMessages = client.logs_from(client.get_channel('488054001795989524')).__iter__()
     while not client.is_closed:
         if ContextOn and CurrentMessages:
             RanNum = random.randint(1,100)
             for i,msg in CurrentMessages:
                 if i == RanNum:
-                    stats = post_status(ChosenMsg)
-                    await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
+                    stats = post_status(msg)
+                    await client.send_message(msg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(msg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
                     await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
 
         for i in range(10): #Waits for 10 minutes
