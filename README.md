@@ -16,7 +16,7 @@ RSCL = Reserved for Client Owner(Robuyasu)
 ## Commands
 The current commands for the bot are as shows:
 
-# __ClientOwnerOnly__
+### _ClientOwnerOnly_
 **!bootdown**
 RSCL, and stops the process of tweeting. Only used for emergencies or reworkings.
 Example: 
