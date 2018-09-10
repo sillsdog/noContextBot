@@ -57,7 +57,7 @@ class ClientOwnerOnly:
             self.client.say("Please enter a valid string message.")
         if message.author.id == RobId:
             await self.client.say("Posting message..")
-            post = post_status(message,postcmd=True)
+            post = post_status(message[:250],postcmd=True)
             await self.client.say(str(post))
             await self.client.say("Posted message to twitter!")
         else:
