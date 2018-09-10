@@ -75,6 +75,7 @@ async def on_message(message):
 
 initial_extensions = [
     'cmds.ClientOwnerOnly',
+    'cmds.ModeratorOnly',
     'cmds.UserAccessible'
 ]
 
