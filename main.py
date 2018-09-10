@@ -75,7 +75,8 @@ async def on_message(message):
     await client.process_commands(message) #Makes sure to process the command
 
 initial_extensions = [
-    'cmds.py'
+    'cmds.ClientOwnerOnly',
+    'cmds.UserAccessible'
 ]
 
 if __name__ == '__main__':
