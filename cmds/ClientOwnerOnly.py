@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 
 class ClientOwnerOnly:
-    def __init__(self,bot):
-        self.bot = bot
+    def __init__(self,client):
+        self.client = client
 
     @client.command(pass_context=True)
     async def bootup(self,ctx):
@@ -44,5 +44,5 @@ class ClientOwnerOnly:
         else:
             await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-def setup(bot):
-    bot.add_cog(ClientOwnerOnly(bot))
+def setup(client):
+    client.add_cog(ClientOwnerOnly(client))
