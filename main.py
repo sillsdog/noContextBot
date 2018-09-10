@@ -26,9 +26,11 @@ def post_status(message,postcmd=False):
             attaches.append(item["url"])
         try:
             if postcmd == False:
+                print("Touchdown")
                 pst = TwitApi.PostUpdate(message.content or " ",media=attaches)
                 return pst
             else:
+                print("Touchdown")
                 Content = message.content.split(" ")
                 pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
                 return pst
@@ -37,9 +39,11 @@ def post_status(message,postcmd=False):
     else:
         try:
             if postcmd == False:
+                print("Touchdown")
                 pst = TwitApi.PostUpdate(message.content or " ")
                 return pst
             else:
+                print("Touchdown")
                 Content = message.content.split(" ")
                 pst = TwitApi.PostUpdate(" ".join(Content[1:]))
                 return pst
@@ -57,6 +61,7 @@ async def post_tweets():
             print(str(CurrentMessages),str(RanNum))
             async for msg in CurrentMessages:
                 if Indx == RanNum:
+                    print("Got randdom message")
                     stats = post_status(msg)
                     await client.send_message(msg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(msg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
                     await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
