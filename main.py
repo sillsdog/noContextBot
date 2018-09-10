@@ -12,7 +12,7 @@ import os
 import random
 from TwitApi import TwitApi
 Client = discord.Client()
-client = commands.Bot(command_prefix='!',max_messages=100)
+client = commands.Bot(command_prefix='!')
 ContextOn = True
 RobId = "154732271742615553"
 CurrentVersion = open("./text/version.txt").read()
