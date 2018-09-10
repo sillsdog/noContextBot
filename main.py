@@ -51,58 +51,6 @@ def post_status(message,postcmd=False):
             pst = TwitApi.PostUpdate(" ".join(Content[1:]))
             return pst
 
-async def bootup(message):
-    if message.author.id == RobId:
-        ContextOn = True
-        await client.send_message(message.channel,"Successfully booted up.")
-    else:
-        await client.send_message(message.channel,"You do not have the permissions to do that, %s!" % (message.author.mention))
-
-
-async def bootdown(message):
-    if message.author.id == RobId:
-        ContextOn = False
-        await client.send_message(message.channel,"Successfully booted down.")
-    else:
-        await client.send_message(message.channel,"You do not have the permissions to do that, %s!" % (message.author.mention))
-
-
-async def post(message):
-    if message.author.id == RobId:
-        await client.send_message(message.channel,"Posting message..")
-        post = post_status(message,postcmd=True)
-        await client.send_message(message.channel,str(post))
-        await client.send_message(message.channel,"Posted message to twitter!")
-
-async def version(message):
-    await client.send_message(message.channel,"Version: 1.3.0")
-
-async def about(message):
-    await client.send_message(message.author,'''
-Hey There! I'm No Context Bot.
-I was programmed by @robuyasu#3100, and was created September 9, 2018.
-
-My purpose is to select recent messages, and tweet one of the many random recent messages.
-I am coded in Python, and hosted at heroku.
-
-Want to view my source code or help out? View https://github.com/Robuyasu/noContextBot
-
-    ''')
-
-async def ppost(message):
-    if message.author.id == RobId:
-        await client.send_message(message.channel, message.content)
-        await client.send_message(message.channel, str(message.attachments) )
-
-contcmds = {
-    "!BOOTUP":bootup,
-    "!BOOTDOWN":bootdown,
-    "!POST":post,
-    "!VERSION":version,
-    "!ABOUT":about,
-    "!PPOST":ppost
-}
-
 async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
@@ -132,9 +80,74 @@ async def on_message(message):
     if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!") and len(message.content) >= 1 :
         CurrentMessages.append(message)
 
-    for cmd,func in contcmds.items():
-        if message.content.upper().startswith(cmd):
-            await func(message)
+@client.command()
+async def bootup(ctx,*args):
+    if message.author.id == RobId:
+        ContextOn = True
+        await client.say("Successfully booted up.")
+    else:
+        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+
+
+async def bootdown(ctx,*args):
+    if message.author.id == RobId:
+        ContextOn = False
+        await client.say("Successfully booted down.")
+    else:
+        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+
+
+async def post(ctx,*args):
+    message = ctx.message
+    if message.author.id == RobId:
+        await client.say("Posting message..")
+        post = post_status(message,postcmd=True)
+        await client.say(str(post))
+        await client.say("Posted message to twitter!")
+
+async def version(message):
+    await client.say("Version: 1.3.0")
+
+async def about(ctx,*args):
+    await client.send_message(message.author,'''
+Hey There! I'm No Context Bot.
+I was programmed by @robuyasu#3100, and was created September 9, 2018.
+
+My purpose is to select recent messages, and tweet one of the many random recent messages.
+I am coded in Python, and hosted at heroku.
+
+```asciidoc
+= Public Commands =
+1:: !version
+Returns the version of No Context Bot.
+
+2:: !about / !help
+DMs the user the help/about message.
+Returns help/about message.
+   
+= Client Owner Commands =
+1:: !post
+Posts to the twitter the following message after the space.
+Returns the twitter.Status post instance in string form.
+
+2:: !ppost
+Returns string form of text and media attachments.
+
+3:: !bootdown
+Sets ContextOn to False. This disables the post_tweets function, causing tweets to turn off.
+
+4:: !bootup
+Sets ContextOn to True. This enables the post_tweets function, causing tweets to run.
+```
+
+Want to view my source code or help out? View https://github.com/Robuyasu/noContextBot
+
+    ''')
+
+async def ppost(ctx,*args):
+    if message.author.id == RobId:
+        await client.say(ctx.message.content)
+        await client.say(str(ctx.message.attachments) )
 
 client.loop.create_task(post_tweets())
 client.run(os.environ.get('TOKEN'))
