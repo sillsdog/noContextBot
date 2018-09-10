@@ -1,5 +1,4 @@
 #No Context Bot by @robuyasu#3100
-#Version 1.3.0
 
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -8,15 +7,15 @@ from collections import defaultdict
 import discord
 import asyncio
 import twitter
-import requests
+import sys, traceback
 import os
 import random
 Client = discord.Client()
 client = commands.Bot(command_prefix='!')
-
 CurrentMessages = []
 ContextOn = True
 RobId = "154732271742615553"
+CurrentVersion = open("text/version.txt").read()
 TwitApi = twitter.Api(consumer_key=os.environ.get('CONSKEY'),
 consumer_secret=os.environ.get('CONSCRT'),
 access_token_key=os.environ.get('ACSKEY'),
@@ -67,7 +66,7 @@ async def post_tweets():
 
 @client.event
 async def on_ready():
-    print("No Context Bot has been started up. To stop the program, say !bootdown . Version 1.3.0")
+    print("No Context Bot has been started up. To stop the program, say !bootdown . Version " + CurrentVersion)
 
 @client.event
 async def on_message(message):
@@ -75,53 +74,17 @@ async def on_message(message):
         CurrentMessages.append(message)
     await client.process_commands(message) #Makes sure to process the command
 
-@client.command(pass_context=True)
-async def bootup(ctx,*args):
-    message = ctx.message
-    if message.author.id == RobId:
-        ContextOn = True
-        await client.say("Successfully booted up.")
-    else:
-        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+initial_extensions = [
+    'cmds.py'
+]
 
-@client.command(pass_context=True)
-async def bootdown(ctx,*args):
-    message = ctx.message
-    if message.author.id == RobId:
-        ContextOn = False
-        await client.say("Successfully booted down.")
-    else:
-        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
-
-@client.command(pass_context=True)
-async def post(ctx,*args):
-    message = ctx.message
-    if message.author.id == RobId:
-        await client.say("Posting message..")
-        post = post_status(message,postcmd=True)
-        await client.say(str(post))
-        await client.say("Posted message to twitter!")
-    else:
-        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
-
-@client.command(pass_context=True)
-async def version(ctx,*args):
-    await client.say("Version: 1.3.0")
-
-@client.command(pass_context=True)
-async def about(ctx,*args):
-    message = ctx.message
-    await client.send_message(message.author,open('discordhelp.txt').read())
-
-@client.command(pass_context=True)
-async def ppost(ctx,*args):
-    message = ctx.message
-    if message.author.id == RobId:
-        content = ctx.message.content.split(" ")
-        await client.say(" ".join(content))
-        await client.say(str(ctx.message.attachments) )
-    else:
-        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+if __name__ == '__main__':
+    for extension in initial_extensions:
+        try:
+            bot.load_extension(extension)
+        except Exception as e:
+            print(f'Failed to load extension {extension}.', file=sys.stderr)
+            traceback.print_exc()
 
 client.loop.create_task(post_tweets())
 client.run(os.environ.get('TOKEN'))
