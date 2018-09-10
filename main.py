@@ -44,7 +44,7 @@ def post_status(message,postcmd=False):
 async def post_tweets():
     await client.wait_until_ready()
     await asyncio.sleep(5)
-    CurrentMessages = yield from client.logs_from(client.get_channel('488054001795989524'))
+    CurrentMessages = client.logs_from(client.get_channel('488054001795989524'))
     while not client.is_closed:
         if ContextOn and CurrentMessages:
             if len(CurrentMessages) >= 1:
