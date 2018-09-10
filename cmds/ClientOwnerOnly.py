@@ -10,39 +10,39 @@ class ClientOwnerOnly:
         message = ctx.message
         if message.author.id == RobId:
             ContextOn = True
-            await client.say("Successfully booted up.")
+            await ctx.send("Successfully booted up.")
         else:
-            await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+            await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
     @client.command(pass_context=True)
     async def bootdown(self,ctx):
         message = ctx.message
         if message.author.id == RobId:
             ContextOn = False
-            await client.say("Successfully booted down.")
+            await ctx.send("Successfully booted down.")
         else:
-            await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+            await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
     @client.command(pass_context=True)
     async def post(self,ctx):
         message = ctx.message
         if message.author.id == RobId:
-            await client.say("Posting message..")
+            await ctx.send("Posting message..")
             post = post_status(message,postcmd=True)
-            await client.say(str(post))
-            await client.say("Posted message to twitter!")
+            await ctx.send(str(post))
+            await ctx.send("Posted message to twitter!")
         else:
-            await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+            await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
     @client.command(pass_context=True)
     async def ppost(self,ctx):
         message = ctx.message
         if message.author.id == RobId:
             content = ctx.message.content.split(" ")
-            await client.say(" ".join(content))
-            await client.say(str(ctx.message.attachments) )
+            await ctx.send(" ".join(content))
+            await ctx.send(str(ctx.message.attachments) )
         else:
-            await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
+            await ctx.send("You do not have the permissions to do that, %s!" % (message.author.mention))
 
 def setup(bot):
     bot.add_cog(ClientOwnerOnly(bot))
