@@ -17,6 +17,7 @@ client = commands.Bot(command_prefix='!')
 CurrentMessages = []
 ContextOn = True
 print("BOOTING")
+print(os.environ.get('TOKEN'))
 print(os.environ.get('CONSKEY'))
 print(os.environ.get('CONSCRT'))
 print(os.environ.get('ACSKEY'))
