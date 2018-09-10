@@ -69,7 +69,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!") and len(message.content) >= 1 :
+    if message.channel.id == "488054001795989524" and message.author.id != "488144253630021651" and not message.content.startswith("!"):
         CurrentMessages.append(message)
     await client.process_commands(message) #Makes sure to process the command
 
