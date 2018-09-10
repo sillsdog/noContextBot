@@ -107,7 +107,7 @@ async def post(ctx,*args):
         await client.say("Posted message to twitter!")
 
 @client.command()
-async def version(message):
+async def version(ctx,*args):
     await client.say("Version: 1.3.0")
 
 @client.command()
