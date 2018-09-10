@@ -4,11 +4,11 @@ import asyncio
 
 class UserAccessible: 
     def __init__(self,client):
-        self.bot = client
+        self.client = client
 
     @commands.command(pass_context=True)
     async def version(self,ctx):
-        await ctx.send("Version: 1.3.2")
+        await self.client.say("Version: 1.3.2")
 
     #@commands.command(pass_context=True)
     #async def about(self,ctx):
