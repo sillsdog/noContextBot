@@ -56,15 +56,14 @@ async def post_tweets():
     CurrentMessages = client.logs_from(client.get_channel('488054001795989524'))
     while not client.is_closed:
         if ContextOn and CurrentMessages:
-            RanNum = random.randint(1,100)
-            Indx = 0
-            print(str(CurrentMessages),str(RanNum))
+            MsgList = []
             async for msg in CurrentMessages:
-                if Indx == RanNum:
-                    print("Got randdom message")
-                    stats = post_status(msg)
-                    await client.send_message(msg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(msg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
-                    await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
+                MsgList.append(msg)
+
+            ChosenMsg = random.choice(MsgList)
+            stats = post_status(ChosenMsg.content)
+            await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
+            await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
         for i in range(10): #Waits for 10 minutes
             if ContextOn:
                 TMinus = "Posting in %s minute(s)" % (10-i)
