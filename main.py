@@ -60,9 +60,10 @@ async def post_tweets():
                 CurrentMessages.clear()
 
         for i in range(10): #Waits for 10 minutes
-            TMinus = "Posting in %s minute(s)" % (10-i)
-            await client.change_presence(game=discord.Game(name=TMinus))
-            await asyncio.sleep(60)
+            if ContextOn:
+                TMinus = "Posting in %s minute(s)" % (10-i)
+                await client.change_presence(game=discord.Game(name=TMinus))
+                await asyncio.sleep(60)
 
 @client.event
 async def on_ready():
@@ -100,6 +101,8 @@ async def post(ctx,*args):
         post = post_status(message,postcmd=True)
         await client.say(str(post))
         await client.say("Posted message to twitter!")
+    else:
+        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
 
 @client.command(pass_context=True)
 async def version(ctx,*args):
@@ -117,6 +120,8 @@ async def ppost(ctx,*args):
         content = ctx.message.content.split(" ")
         await client.say(" ".join(content))
         await client.say(str(ctx.message.attachments) )
+    else:
+        await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
 
 client.loop.create_task(post_tweets())
 client.run(os.environ.get('TOKEN'))
