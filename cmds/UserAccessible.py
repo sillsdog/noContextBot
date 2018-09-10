@@ -1,14 +1,14 @@
 import discord
 from discord.ext import commands
-CurrentVersion = open("./text/version.txt").read()
+import asyncio
 
 class UserAccessible: 
     def __init__(self,client):
-        self.client = client
+        self.bot = client
 
     @commands.command(pass_context=True)
     async def version(self,ctx):
-        await ctx.send("Version: " + CurrentVersion)
+        await ctx.send("Version: 1.3.2")
 
     #@commands.command(pass_context=True)
     #async def about(self,ctx):
