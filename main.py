@@ -16,13 +16,6 @@ client = commands.Bot(command_prefix='!')
 
 CurrentMessages = []
 ContextOn = True
-print("BOOTING")
-print(os.environ.get('TOKEN'))
-print(os.environ.get('CONSKEY'))
-print(os.environ.get('CONSCRT'))
-print(os.environ.get('ACSKEY'))
-print(os.environ.get('ACSSCRT'))
-
 RobId = "154732271742615553"
 TwitApi = twitter.Api(consumer_key=os.environ.get('CONSKEY'),
 consumer_secret=os.environ.get('CONSCRT'),
@@ -73,7 +66,7 @@ async def post_tweets():
 
 @client.event
 async def on_ready():
-    print("No Context Bot has been started up. To stop the program @robuyasu#3100 , say !bootdown . Version 1.3.0")
+    print("No Context Bot has been started up. To stop the program, say !bootdown . Version 1.3.0")
 
 @client.event
 async def on_message(message):
@@ -115,46 +108,14 @@ async def version(ctx,*args):
 @client.command(pass_context=True)
 async def about(ctx,*args):
     message = ctx.message
-    await client.send_message(message.author,'''
-Hey There! I'm No Context Bot.
-I was programmed by @robuyasu#3100, and was created September 9, 2018.
-
-My purpose is to select recent messages, and tweet one of the many random recent messages.
-I am coded in Python, and hosted at heroku.
-
-```asciidoc
-= Public Commands =
-1:: !version
-Returns the version of No Context Bot.
-
-2:: !about / !help
-DMs the user the help/about message.
-Returns help/about message.
-   
-= Client Owner Commands =
-1:: !post
-Posts to the twitter the following message after the space.
-Returns the twitter.Status post instance in string form.
-
-2:: !ppost
-Returns string form of text and media attachments.
-
-3:: !bootdown
-Sets ContextOn to False. This disables the post_tweets function, causing tweets to turn off.
-
-4:: !bootup
-Sets ContextOn to True. This enables the post_tweets function, causing tweets to run.
-```
-
-Want to view my source code or help out? View https://github.com/Robuyasu/noContextBot
-
-    ''')
+    await client.send_message(message.author,open('discordhelp.txt').read())
 
 @client.command(pass_context=True)
 async def ppost(ctx,*args):
     message = ctx.message
     if message.author.id == RobId:
-        await client.say(ctx.message.content)
+        content = ctx.message.content.split(" ")
+        await client.say(" ".join(content))
         await client.say(str(ctx.message.attachments) )
 
 client.loop.create_task(post_tweets())
