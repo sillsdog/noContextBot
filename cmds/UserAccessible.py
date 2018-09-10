@@ -4,7 +4,7 @@ from discord.ext import commands
 class UserAccessible: 
     @client.command(pass_context=True)
     async def version(self,ctx):
-        await client.say("Version: " + CurrentVersion)
+        await ctx.send("Version: " + CurrentVersion)
 
     @client.command(pass_context=True)
     async def about(self,ctx):
