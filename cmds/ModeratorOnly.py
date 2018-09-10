@@ -22,6 +22,12 @@ class ModeratorOnly:
             await self.client.say(member.mention + " has been kicked.")
 
     @commands.command(pass_context=True)
+    async def purge(self, ctx, amount: int = 50):
+        if IsMod(ctx.message.author)
+            await self.client.purge_from(ctx.message.channel,limit=amount)
+            await self.client.say("Successfully purged %s messages." % (amount) )
+
+    @commands.command(pass_context=True)
     async def ban(self, ctx, member: discord.Member, days: int = 1):
         if IsMod(ctx.message.author) and ctx.message.author is not member:
             await self.client.ban(member,days)
