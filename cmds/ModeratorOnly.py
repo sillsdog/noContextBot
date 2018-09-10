@@ -23,7 +23,7 @@ class ModeratorOnly:
 
     @commands.command(pass_context=True)
     async def purge(self, ctx, amount: int = 50):
-        if IsMod(ctx.message.author)
+        if IsMod(ctx.message.author):
             await self.client.purge_from(ctx.message.channel,limit=amount)
             await self.client.say("Successfully purged %s messages." % (amount) )
 
