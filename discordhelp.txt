@@ -1,0 +1,31 @@
+Hey There! I'm No Context Bot.
+I was programmed by @robuyasu#3100, and was created September 9, 2018.
+
+My purpose is to select recent messages, and tweet one of them.
+I am coded in Python, and hosted at heroku.
+
+```asciidoc
+= Public Commands =
+1:: !version
+Returns the version of No Context Bot.
+
+2:: !about / !help
+DMs the user the help/about message.
+Returns help/about message.
+   
+= Client Owner Commands =
+1:: !post
+Posts to the twitter the following message after the space.
+Returns the twitter.Status post instance in string form.
+
+2:: !ppost
+Returns string form of text and media attachments.
+
+3:: !bootdown
+Sets ContextOn to False. This disables the post_tweets function, causing tweets to turn off.
+
+4:: !bootup
+Sets ContextOn to True. This enables the post_tweets function, causing tweets to run.
+```
+
+Want to view my source code or help out? View https://github.com/Robuyasu/noContextBot
