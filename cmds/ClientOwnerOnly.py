@@ -71,5 +71,10 @@ class ClientOwnerOnly:
         else:
             await self.client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
 
+    @commands.command(pass_context=True)
+    async def getmessages(self,ctx):
+        msgs = self.client.messages
+        print(str(msgs))
+
 def setup(client):
     client.add_cog(ClientOwnerOnly(client))
