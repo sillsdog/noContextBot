@@ -11,23 +11,32 @@ def post_status(message,postcmd=False):
         attaches = []
         for item in message.attachments:
             attaches.append(item["url"])
-
-        if postcmd == False:
-            pst = TwitApi.PostUpdate(message.content,media=attaches)
-            return pst
-        else:
-            Content = message.content.split(" ")
-            pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
-            return pst
+        try:
+            if postcmd == False:
+                print("Touchdown")
+                pst = TwitApi.PostUpdate(message.content[:250] or " ",media=attaches)
+                return pst
+            else:
+                print("Touchdown")
+                Content = message.content.split(" ")
+                pst = TwitApi.PostUpdate((" ".join(Content[1:]))[:250],media=attaches)
+                return pst
+        except TwitterError:
+            return False
     else:
-        if postcmd == False:
-            pst = TwitApi.PostUpdate(message.content)
-            return pst
-        else:
-            Content = message.content.split(" ")
-            pst = TwitApi.PostUpdate(" ".join(Content[1:]))
-            return pst
-
+        try:
+            if postcmd == False:
+                print("Touchdown")
+                pst = TwitApi.PostUpdate(message.content[:250] or " ")
+                return pst
+            else:
+                print("Touchdown")
+                Content = message.content.split(" ")
+                pst = TwitApi.PostUpdate( (" ".join(Content[1:]))[:250] )
+                return pst
+        except TwitterError:
+            return False
+            
 class ClientOwnerOnly:
     def __init__(self,client):
         self.client = client
@@ -57,7 +66,7 @@ class ClientOwnerOnly:
             self.client.say("Please enter a valid string message.")
         if message.author.id == RobId:
             await self.client.say("Posting message..")
-            post = post_status(message[:250],postcmd=True)
+            post = post_status(message,postcmd=True)
             await self.client.say(str(post))
             await self.client.say("Posted message to twitter!")
         else:
