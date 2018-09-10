@@ -1,5 +1,5 @@
 #No Context Bot by @robuyasu#3100
-#Version 1.2.5
+#Version 1.3.0
 
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -75,7 +75,7 @@ async def post(message):
         await client.send_message(message.channel,"Posted message to twitter!")
 
 async def version(message):
-    await client.send_message(message.channel,"Version: 1.2.5")
+    await client.send_message(message.channel,"Version: 1.3.0")
 
 async def about(message):
     await client.send_message(message.author,'''
@@ -125,7 +125,7 @@ async def post_tweets():
 
 @client.event
 async def on_ready():
-    print("No Context Bot has been started up. To stop the program @robuyasu#3100 , say !bootdown . Version 1.2.5")
+    print("No Context Bot has been started up. To stop the program @robuyasu#3100 , say !bootdown . Version 1.3.0")
 
 @client.event
 async def on_message(message):
