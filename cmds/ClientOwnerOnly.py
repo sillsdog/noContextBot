@@ -1,11 +1,12 @@
 import discord
 from discord.ext import commands
+import asyncio
 
 RobId = "154732271742615553"
 
 class ClientOwnerOnly:
     def __init__(self,client):
-        self.client = client
+        self.bot = client
 
     @commands.command(pass_context=True)
     async def bootup(self,ctx):
