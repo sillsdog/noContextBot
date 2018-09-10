@@ -10,10 +10,10 @@ class UserAccessible:
     async def version(self,ctx):
         await self.client.say("Version: 1.3.2")
 
-    #@commands.command(pass_context=True)
-    #async def about(self,ctx):
-    #    message = ctx.message
-    #    await client.send_message(message.author,open('text/discordhelp.txt').read())
+    @commands.command(pass_context=True)
+    async def about(self,ctx):
+        message = ctx.message
+        await self.client.send_message(message.author,open('text/discordhelp.txt').read())
 
 def setup(client):
     client.add_cog(UserAccessible(client))
