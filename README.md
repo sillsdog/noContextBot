@@ -3,8 +3,8 @@
 What is No Context Bot? It is a bot that randomly picks a new discord message every 10 minutes, and tweets that to twitter. 
 It is exclusively for the No Context Discord server, which can be joined right here: discord.gg/tStrPZB
 
-How does the selective process work? First, it uses the `client.logs_from()` to pick the most recent 100 posts.
-Then, out of those 100 posts, it randomly selects one using `random.randint(1,100)`, and tweets it to twitter using the 
+How does the selective process work? First, it uses the `client.logs_from()` to pick the most recent 25 posts, and then turns
+it into a list, in which `random.choice(logs)` is now used. After that, it gets a random item in the list, and tweets it to twitter using the 
 imported twitter package, by doing `TwitApi.PostUpdate(message.content or " ",media=attaches)`. This process allows
 new posts to be added and old posts to be burried or discovered, but also for the twitter account to keep on posting, non-stop every 10 minutes.
 
