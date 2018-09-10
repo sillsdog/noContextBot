@@ -73,7 +73,7 @@ class ClientOwnerOnly:
 
     @commands.command(pass_context=True)
     async def getmessages(self,ctx):
-        msgs = self.client.messages
+        msgs =  self.client.logs_from(self.client.get_channel('488054001795989524'))
         print(str(msgs))
 
 def setup(client):
