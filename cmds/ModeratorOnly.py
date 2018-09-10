@@ -25,4 +25,7 @@ class ModeratorOnly:
     async def ban(self, ctx, member: discord.Member, days: int = 1):
         if IsMod(ctx.author):
             await self.client.ban(member,days)
-            await self.client.send("%s has been banned for %s days." % (member.mention,str(days)) )    
+            await self.client.send("%s has been banned for %s days." % (member.mention,str(days)) )   
+
+def setup(client):
+    client.add_cog(ModeratorOnly(client))
