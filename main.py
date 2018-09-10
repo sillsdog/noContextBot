@@ -47,13 +47,12 @@ async def post_tweets():
     CurrentMessages = client.logs_from(client.get_channel('488054001795989524'))
     while not client.is_closed:
         if ContextOn and CurrentMessages:
-            ChosenMsg = random.choice(CurrentMessages)
-            if ChosenMsg:
-                stats = post_status(ChosenMsg)
-                await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
-                await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
-            else:
-                print("Twit API error has occured.")
+            RanNum = random.randint(1,100)
+            for i,msg in CurrentMessages:
+                if i == RanNum:
+                    stats = post_status(ChosenMsg)
+                    await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
+                    await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
 
         for i in range(10): #Waits for 10 minutes
             if ContextOn:
