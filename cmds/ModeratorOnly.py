@@ -17,13 +17,13 @@ class ModeratorOnly:
 
     @commands.command(pass_context=True)
     async def kick(self, ctx, member: discord.Member):
-        if IsMod(ctx.author):
+        if IsMod(self.client.author):
             await self.client.kick(member)
             await self.client.send(member.mention + " has been kicked.")
 
     @commands.command(pass_context=True)
     async def ban(self, ctx, member: discord.Member, days: int = 1):
-        if IsMod(ctx.author):
+        if IsMod(self.client.author):
             await self.client.ban(member,days)
             await self.client.send("%s has been banned for %s days." % (member.mention,str(days)) )   
 
