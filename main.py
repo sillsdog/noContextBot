@@ -27,12 +27,12 @@ def post_status(message,postcmd=False):
         try:
             if postcmd == False:
                 print("Touchdown")
-                pst = TwitApi.PostUpdate(message.content or " ",media=attaches)
+                pst = TwitApi.PostUpdate(message.content[:250] or " ",media=attaches)
                 return pst
             else:
                 print("Touchdown")
                 Content = message.content.split(" ")
-                pst = TwitApi.PostUpdate(" ".join(Content[1:]),media=attaches)
+                pst = TwitApi.PostUpdate((" ".join(Content[1:]))[:250],media=attaches)
                 return pst
         except TwitterError:
             return False
@@ -40,12 +40,12 @@ def post_status(message,postcmd=False):
         try:
             if postcmd == False:
                 print("Touchdown")
-                pst = TwitApi.PostUpdate(message.content or " ")
+                pst = TwitApi.PostUpdate(message.content[:250] or " ")
                 return pst
             else:
                 print("Touchdown")
                 Content = message.content.split(" ")
-                pst = TwitApi.PostUpdate(" ".join(Content[1:]))
+                pst = TwitApi.PostUpdate( (" ".join(Content[1:]))[:250] )
                 return pst
         except TwitterError:
             return False
