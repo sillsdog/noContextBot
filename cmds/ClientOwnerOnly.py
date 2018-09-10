@@ -53,6 +53,8 @@ class ClientOwnerOnly:
     @commands.command(pass_context=True)
     async def post(self,ctx):
         message = ctx.message
+        if message is None:
+            self.client.say("Please enter a valid string message.")
         if message.author.id == RobId:
             await self.client.say("Posting message..")
             post = post_status(message,postcmd=True)
@@ -64,6 +66,8 @@ class ClientOwnerOnly:
     @commands.command(pass_context=True)
     async def ppost(self,ctx):
         message = ctx.message
+        if message is None:
+            self.client.say("Please enter a valid string message.")
         if message.author.id == RobId:
             content = ctx.message.content.split(" ")
             await self.client.say(" ".join(content))
@@ -75,6 +79,14 @@ class ClientOwnerOnly:
     async def getmessages(self,ctx):
         msgs =  self.client.logs_from(self.client.get_channel('488054001795989524'))
         print(str(msgs))
+
+    @commands.command(pass_context=True)
+    async def ban(self, ctx, member: discord.Member, days: int = 1):
+        if member is None:
+            self.client.say("Please enter a valid member.")
+        if ctx.message.author.id == RobId:
+            await self.client.ban(member,days)
+            await self.client.say("%s has been banned for %s days." % (member.mention,str(days)) )   
 
 def setup(client):
     client.add_cog(ClientOwnerOnly(client))
