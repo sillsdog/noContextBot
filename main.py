@@ -16,17 +16,17 @@ client = commands.Bot(command_prefix='!')
 
 CurrentMessages = []
 ContextOn = True
+print("BOOTING")
+print(os.environ.get('CONSKEY'))
+print(os.environ.get('CONSCRT'))
+print(os.environ.get('ACSKEY'))
+print(os.environ.get('ACSSCRT'))
 
 RobId = "154732271742615553"
 TwitApi = twitter.Api(consumer_key=os.environ.get('CONSKEY'),
 consumer_secret=os.environ.get('CONSCRT'),
 access_token_key=os.environ.get('ACSKEY'),
 access_token_secret=os.environ.get('ACSSCRT'))
-
-print(os.environ.get('CONSKEY'))
-print(os.environ.get('CONSCRT'))
-print(os.environ.get('ACSKEY'))
-print(os.environ.get('ACSSCRT'))
 
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
