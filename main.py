@@ -81,7 +81,7 @@ async def on_message(message):
         CurrentMessages.append(message)
     await client.process_commands(message) #Makes sure to process the command
 
-@client.command()
+@client.command(pass_context=True)
 async def bootup(ctx,*args):
     if message.author.id == RobId:
         ContextOn = True
@@ -89,7 +89,7 @@ async def bootup(ctx,*args):
     else:
         await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-@client.command()
+@client.command(pass_context=True)
 async def bootdown(ctx,*args):
     if message.author.id == RobId:
         ContextOn = False
@@ -97,7 +97,7 @@ async def bootdown(ctx,*args):
     else:
         await client.say("You do not have the permissions to do that, %s!" % (message.author.mention))
 
-@client.command()
+@client.command(pass_context=True)
 async def post(ctx,*args):
     message = ctx.message
     if message.author.id == RobId:
@@ -106,11 +106,11 @@ async def post(ctx,*args):
         await client.say(str(post))
         await client.say("Posted message to twitter!")
 
-@client.command()
+@client.command(pass_context=True)
 async def version(ctx,*args):
     await client.say("Version: 1.3.0")
 
-@client.command()
+@client.command(pass_context=True)
 async def about(ctx,*args):
     await client.send_message(message.author,'''
 Hey There! I'm No Context Bot.
@@ -147,7 +147,7 @@ Want to view my source code or help out? View https://github.com/Robuyasu/noCont
 
     ''')
 
-@client.command()
+@client.command(pass_context=True)
 async def ppost(ctx,*args):
     if message.author.id == RobId:
         await client.say(ctx.message.content)
