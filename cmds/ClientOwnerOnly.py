@@ -1,8 +1,13 @@
 import discord
 from discord.ext import commands
 import asyncio
+import twitter
 
 RobId = "154732271742615553"
+TwitApi = twitter.Api(consumer_key=os.environ.get('CONSKEY'),
+consumer_secret=os.environ.get('CONSCRT'),
+access_token_key=os.environ.get('ACSKEY'),
+access_token_secret=os.environ.get('ACSSCRT'))
 
 def post_status(message,postcmd=False):
     if len(message.attachments) >= 1:
