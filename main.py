@@ -27,7 +27,7 @@ def post_status(message,postcmd=False):
             attaches.append(item["url"])
 
         if postcmd == False:
-            pst = TwitApi.PostUpdate(message.content,media=attaches)
+            pst = TwitApi.PostUpdate(message.content or " ",media=attaches)
             return pst
         else:
             Content = message.content.split(" ")
@@ -35,7 +35,7 @@ def post_status(message,postcmd=False):
             return pst
     else:
         if postcmd == False:
-            pst = TwitApi.PostUpdate(message.content)
+            pst = TwitApi.PostUpdate(message.content or " ")
             return pst
         else:
             Content = message.content.split(" ")
