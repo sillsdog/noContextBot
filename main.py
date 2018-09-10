@@ -61,7 +61,7 @@ async def post_tweets():
                 MsgList.append(msg)
 
             ChosenMsg = random.choice(MsgList)
-            stats = post_status(ChosenMsg.content)
+            stats = post_status(ChosenMsg)
             await client.send_message(ChosenMsg.author,"%s, your message has been tweeted to the twitter account! Check it out here: %s"%(ChosenMsg.author.mention,"https://twitter.com/statuses/" + str(stats.id)))
             await client.send_message(client.get_channel("488474777766461450"),"https://twitter.com/statuses/" + str(stats.id))
         for i in range(10): #Waits for 10 minutes
